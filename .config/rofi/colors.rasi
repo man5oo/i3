@@ -1,0 +1,57 @@
+/* Color definitions */
+
+* {
+	bg:            rgb(40, 40, 40);
+	fg:            rgb(235, 219, 178);
+	black:         rgb(40, 40, 40);
+	charcoal:      rgb(47, 47, 47);
+	dark1:          rgb(1, 4, 6);
+	dark2:         rgb(39, 42, 47);
+	dark3:         rgb(57, 70, 80);
+	dark4:         rgb(68, 82, 93);
+	gray1:         rgb(60, 64, 67);
+	gray2:         rgb(95, 99, 104);
+	gray3:         rgb(128, 134, 139);
+	lightgray1:    rgb(184, 184, 184);
+	lightgray2:    rgb(222, 222, 222);
+	lightgray3:    rgb(239, 239, 239);
+	red:           rgb(244, 30, 10);
+	red2:          rgb(150, 10, 10);
+	green:         rgb(12, 154, 50);
+	forest:        rgb(78, 115, 102);
+	yellow:        rgb(226, 200, 30);
+	blue:          rgb(19, 104, 244);
+	blue2:         rgb(59, 89, 152);
+	lightblue:     rgb(66, 133, 244);
+	magenta:       rgb(177, 98, 134);
+	violet1:       rgb(109, 29, 188);
+	violet2:       rgb(123, 31, 162);
+	cyan:          rgb(104, 157, 106);
+	white:         rgb(250, 250, 250);
+	lightfg:                     @lightgray1;
+    	lightbg:                     @dark4;
+    	foreground:                  @fg;	
+    	background:                  @charcoal;	
+	background-color:            @charcoal;
+    	separatorcolor:              @foreground;
+    	border-color:                @charcoal;
+    	selected-normal-foreground:  @lightbg;
+    	selected-normal-background:  @lightfg;
+    	selected-active-foreground:  @background;
+    	selected-active-background:  @blue;
+    	selected-urgent-foreground:  @background;
+    	selected-urgent-background:  @red;
+    	normal-foreground:           @foreground;
+    	normal-background:           @background;
+    	active-foreground:           @blue;
+    	active-background:           @background;
+    	urgent-foreground:           @red;
+    	urgent-background:           @background;
+    	alternate-normal-foreground: @foreground;
+    	alternate-normal-background: @lightbg;
+    	alternate-active-foreground: @blue;
+    	alternate-active-background: @lightbg;
+    	alternate-urgent-foreground: @red;
+    	alternate-urgent-background: @lightbg;
+ }
+
