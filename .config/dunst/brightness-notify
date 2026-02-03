@@ -1,0 +1,19 @@
+#!/bin/sh
+
+BRIGHT=$(brightnessctl -m | cut -d, -f4 | tr -d '%')
+
+if [ "$BRIGHT" -lt 30 ]; then
+  ICON="display-brightness-low-symbolic"
+elif [ "$BRIGHT" -lt 70 ]; then
+  ICON="display-brightness-medium-symbolic"
+else
+  ICON="display-brightness-high-symbolic"
+fi
+
+/usr/bin/dunstify \
+  -a brightness \
+  -i "$ICON" \
+  -h int:value:"$BRIGHT" \
+  -h int:max:100 \
+  -r 9994 \
+  "Luminosità $BRIGHT%"

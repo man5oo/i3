@@ -1,0 +1,25 @@
+#!/bin/sh
+
+VOL=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]\+%' | head -n1 | tr -d '%')
+MUTE=$(pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && echo 1 || echo 0)
+
+if [ "$MUTE" -eq 1 ]; then
+  ICON=audio-volume-muted-symbolic
+else
+  if [ "$VOL" -lt 30 ]; then
+    ICON=audio-volume-low-symbolic
+  elif [ "$VOL" -lt 70 ]; then
+    ICON=audio-volume-medium-symbolic
+  else
+    ICON=audio-volume-high-symbolic
+  fi
+fi
+
+/usr/bin/dunstify \
+  -a volume \
+  -i $ICON \
+  -h int:value:"$VOL" \
+  -h int:max:100 \
+  -r 9993 \
+  "Volume $VOL%" \
+  
