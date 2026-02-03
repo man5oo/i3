@@ -1,0 +1,265 @@
+# i3 config file di manuel
+#
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+# 1) GENERAL
+
+set $mod Mod4
+set $CONFIG /home/manuel/.config
+
+set $TERMINAL alacritty
+set $MONITOR htop
+set $BROWSER firefox
+set $FILEM Pcmanfm
+set $EDITOR gedit
+
+# 2) STARTUP
+
+exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080 --rate 60
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id picom
+exec --no-startup-id betterlockscreen -w dim
+exec --no-startup-id xss-lock -- betterlockscreen -l &
+exec --no-startup-id xinput disable "ELAN Touchscreen"
+exec --no-startup-id nm-applet
+exec_always --no-startup-id blueman-applet
+exec --no-startup-id udiskie 
+
+# 3) LOOK
+
+font pango:monospace 16
+#font pango:monospace Font Awesome 7 Free 16, Font Awesome 7 Brands Regular, Font Awesome 7 Brands Regular, Font Awesome 7 Free Solid, Ubuntu:style=Regular
+font pango:JetBrainsMono Nerd Font 16
+
+default_border normal 
+default_floating_border normal
+title_align left
+
+exec --no-startup-id feh --bg-scale $HOME/Pictures/Wallpapers/arch-1920x1080.png
+#include $HOME/.config/i3/colors
+#include $CONFIG/i3/colors-google-palette.conf
+
+#set $test #ff0000
+set $bg #282828
+set $fg #ebdbb2
+set $black #282828
+set $charcoal #2f2f2f
+set $dark1 #010406
+set $dark2 #272a2f
+set $dark3 #394650
+set $dark4 #44525d
+set $gray1 #3c4043
+set $gray2 #5f6368
+set $gray3 #80868b
+set $lightgray1 #b8b8b8
+set $lightgray2 #dedede
+set $lightgray3 #efefef
+set $red #f41e0a
+set $red2 #960a0a
+set $green #0c9a32
+set $forest #4e7366
+set $yellow #e2c81e
+set $blue #1368f4
+set $blue2 #3b5998
+set $lightblue #4285f4
+set $magenta #b16286
+set $violet1 #6d1dbc
+set $violet2 #7b1fa2
+set $cyan #689d6a
+set $white #fafafa
+
+# class                   border 	backgr. 	text    	indic.   	child_border
+
+client.focused            $charcoal	$charcoal	$fg		#charcoal 	$charcoal
+client.focused_inactive   $charcoal 	$charcoal	$test	 	#charcoal	$charcoal
+client.unfocused          $dark3	$dark3 		$fg		#1ABC9C 	$dark3
+client.urgent             #red 		#charcoal	$red		#red 		#red
+#client.placeholder       #000000 	#0c0c0c 			#ffffff 	#000000
+
+#client.background       $background
+
+
+# 4) BINDINGS
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+tiling_drag modifier titlebar
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && $CONFIG/dunst/volume-notify
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5 && $CONFIG/dunst/volume-notify
+bindsym XF86AudioMute exec --no-startup-id pamixer -t && $CONFIG/dunst/volume-notify
+#bindsym XF86AudioPlay exec "playerctl play-pause" 
+#bindsym XF86AudioNext exec "playerctl next"
+#bindsym XF86AudioPrev exec "playerctl previous"
+bindsym XF86MonBrightnessUp exec brightnessctl set +10% && $CONFIG/dunst/brightness-notify
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%- && $CONFIG/dunst/brightness-notify
+
+bindsym --release Print exec --no-startup-id "scrot -s -e 'mv $f /home/manuel/Pictures/Screenshots/'; dunstify 'Screenshot saved'"
+bindsym $mod+Return exec $TERMINAL
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+space exec rofi -show drun -config $CONFIG/rofi/app-menu.rasi
+bindsym $mod+Shift+Tab exec rofi -show window -config $CONFIG/rofi/window-switcher.rasi
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+ograve focus right
+
+bindsym $mod+Tab workspace next 
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+
+bindsym $mod+a focus parent
+#bindsym $mod+d focus child
+bindsym $mod+e layout toggle split #change container layout
+bindsym $mod+f fullscreen toggle
+bindsym $mod+h split h
+bindsym $mod+l exec betterlockscreen -l dim
+bindsym $mod+m exec "pactl set-source-mute @DEFAULT_SOURCE@ toggle; dunstify 'Mic mute'"
+bindsym $mod+r mode "resize"
+bindsym $mod+q kill
+#bindsym $mod+s layout stacking #change container layout
+bindsym $mod+v split v
+bindsym $mod+w layout tabbed #change container layout
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+l exec --no-startup-id sh $CONFIG/i3blocks/blocks/powermenu
+bindsym $mod+Shift+r restart
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 " " 
+set $ws7 " "
+set $ws8 " "
+set $ws9 " "
+set $ws10 ""
+
+#assign [class="$FILEM"] 3
+assign [class="Google"] $ws6
+assign [class="Gedit"] $ws7
+assign [class="$FILEM"] $ws8
+assign [class="$BROWSER"] $ws9 
+for_window [urgent=latest] focus 
+
+# 5) RESIZE
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+
+
+# 6) BAR
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
+	font pango:monospace 12
+	tray_output primary
+	#tray_padding 1
+	position top
+	mode dock
+	separator_symbol " "
+	colors {
+			background $charcoal
+
+			#			border		background		text
+			focused_workspace	$charcoal	$dark3			$fg
+			inactive_workspace	$charcoal	$charcoal		$fg
+			urgent_workspace	$red		$red			$fg
+			}
+
+}
+
+# 7) i3 GAPPS
+
+# Set inner/outer gaps
+gaps inner 14
+gaps outer -2
+
+# Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
+# gaps inner|outer current|all set|plus|minus <px>
+# gaps inner all set 10
+# gaps outer all plus 5
+# Smart gaps (gaps used if only more than one container on the workspace)
+smart_gaps off
+
+# Smart borders (draw borders around container only if it is not the only container on this workspace)
+# on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
+smart_borders on
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        	bindsym o      mode "$mode_gaps_outer"
+        	bindsym i      mode "$mode_gaps_inner"
+        	bindsym Return mode "default"
+        	bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        	bindsym plus  gaps inner current plus 5
+        	bindsym minus gaps inner current minus 5
+        	bindsym 0     gaps inner current set 0
+
+        	bindsym Shift+plus  gaps inner all plus 5
+        	bindsym Shift+minus gaps inner all minus 5
+        	bindsym Shift+0     gaps inner all set 0
+
+        	bindsym Return mode "default"
+        	bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        	bindsym plus  gaps outer current plus 5
+        	bindsym minus gaps outer current minus 5
+        	bindsym 0     gaps outer current set 0
+
+        	bindsym Shift+plus  gaps outer all plus 5
+        	bindsym Shift+minus gaps outer all minus 5
+        	bindsym Shift+0     gaps outer all set 0
+
+        	bindsym Return mode "default"
+        	bindsym Escape mode "default"
+}
