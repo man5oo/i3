@@ -17,4 +17,4 @@ alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 PS1='[\u@\h \W]\$ '
 
 # Created by `pipx` on 2026-01-11 10:54:14
-export PATH="$PATH:/home/manuel/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
