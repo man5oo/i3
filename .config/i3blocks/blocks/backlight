@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# FROM https://github.com/nashamri/i3blocks/blob/master/brightness
-
 # One of the following: xrandr, xbacklight, kernel
 METHOD="xbacklight"
 METHOD="brightnessctl"

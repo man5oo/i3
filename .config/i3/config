@@ -22,8 +22,8 @@ exec --no-startup-id betterlockscreen -w dim
 exec --no-startup-id xss-lock -- betterlockscreen -l &
 exec --no-startup-id xinput disable "ELAN Touchscreen"
 exec --no-startup-id nm-applet
-exec_always --no-startup-id blueman-applet
-exec --no-startup-id udiskie 
+exec --no-startup-id blueman-applet
+exec --no-startup-id udiskie -t 
 
 # 3) LOOK
 

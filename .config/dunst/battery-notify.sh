@@ -6,7 +6,6 @@ STATE_FILE="/tmp/battery_state"
 LEVEL=$(cat "$BAT_PATH/capacity")
 STATUS=$(cat "$BAT_PATH/status")
 
-# Stato logico semplice
 case "$STATUS" in
   Charging)    STATE="charging" ;;
   Discharging) STATE="discharging" ;;
@@ -14,12 +13,10 @@ case "$STATUS" in
   *) exit 0 ;;
 esac
 
-# Evita doppie notifiche
 [ -f "$STATE_FILE" ] && LAST=$(cat "$STATE_FILE")
 [ "$STATE" = "$LAST" ] && exit 0
 echo "$STATE" > "$STATE_FILE"
 
-# Notifica finale (UNA SOLA)
 case "$STATE" in
   charging)
     ICON="battery-ac-adapter-symbolic"
@@ -48,8 +45,7 @@ dunstify \
   -h int:max:100 \
   -r 9995 \
   "Batteria $TEXT"
-  
-# ---- soglia batteria ----
+
 THRESHOLD=20
 LOW_FILE="/tmp/battery_low_notified"
 
